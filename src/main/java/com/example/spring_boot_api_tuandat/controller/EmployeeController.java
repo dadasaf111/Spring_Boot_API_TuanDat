@@ -1,6 +1,6 @@
 package com.example.spring_boot_api_tuandat.controller;
 
-import com.example.spring_boot_api_tuandat.dto.UserDTO;
+import com.example.spring_boot_api_tuandat.dto.EmployeeDTO;
 import com.example.spring_boot_api_tuandat.entity.Employee;
 import com.example.spring_boot_api_tuandat.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +37,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/employeesDTO")
-    public List<UserDTO> getListUsers(){
+    public List<EmployeeDTO> getListUsers(){
         List<Employee> list= employeeService.getAllEmployees();
-        List<UserDTO> list1= new ArrayList<>();
+        List<EmployeeDTO> list1= new ArrayList<>();
         for (Employee employee:list) {
-            list1.add(new UserDTO(employee));
+            list1.add(new EmployeeDTO(employee));
         }
         return list1;
     }
