@@ -3,8 +3,11 @@ package com.example.spring_boot_api_tuandat.controller;
 import com.example.spring_boot_api_tuandat.entity.Employee;
 import com.example.spring_boot_api_tuandat.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -13,8 +16,8 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping("/employees")
-    public Employee saveEmployee(@RequestBody Employee employee) {
-        return employeeService.saveEmployee(employee);
+    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employee) {
+        return  new ResponseEntity<Employee>(employeeService.saveEmployee(employee), HttpStatus.CREATED);
     }
     @GetMapping("/employees")
     public List<Employee> getAllEmployees(){
@@ -25,8 +28,8 @@ public class EmployeeController {
         return employeeService.getEmployeeById(employeeId);
     }
     @PutMapping("/employees/{id}")
-    public Employee updateEmployeeById(@PathVariable("id") Long employeeId,@RequestBody Employee employee){
-        return  employeeService.updateEmployeeById(employeeId,employee);
+    public ResponseEntity<Employee> updateEmployeeById(@PathVariable("id") Long employeeId,@Valid @RequestBody Employee employee){
+        return  new ResponseEntity<Employee>(employeeService.updateEmployeeById(employeeId,employee),HttpStatus.CREATED);
     }
     @DeleteMapping("/employees/{id}")
     public String deleteById(@PathVariable("id") Long employeeId){
