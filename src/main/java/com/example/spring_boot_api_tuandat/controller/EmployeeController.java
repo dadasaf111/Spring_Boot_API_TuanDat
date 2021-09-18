@@ -1,10 +1,12 @@
 package com.example.spring_boot_api_tuandat.controller;
 
+import com.example.spring_boot_api_tuandat.dto.UserDTO;
 import com.example.spring_boot_api_tuandat.entity.Employee;
 import com.example.spring_boot_api_tuandat.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,5 +34,15 @@ public class EmployeeController {
     public String deleteById(@PathVariable("id") Long employeeId){
         employeeService.deleteById(employeeId);
         return "Delete Sucessfully!";
+    }
+
+    @GetMapping("/employeesDTO")
+    public List<UserDTO> getListUsers(){
+        List<Employee> list= employeeService.getAllEmployees();
+        List<UserDTO> list1= new ArrayList<>();
+        for (Employee employee:list) {
+            list1.add(new UserDTO(employee));
+        }
+        return list1;
     }
 }
