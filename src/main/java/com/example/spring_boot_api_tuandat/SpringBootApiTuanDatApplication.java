@@ -13,22 +13,4 @@ public class SpringBootApiTuanDatApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringBootApiTuanDatApplication.class, args);
     }
-    //Save
-    private void insertEmployees(EmployeeRepository repository){
-        Employee employee = Employee.builder()
-                .firstName("Tuan")
-                .lastName("Dat")
-                .email("vanteonguyen955@gmail.com")
-                .build();
-        repository.save(employee);
-    }
-
-    @Bean
-    public CommandLineRunner run(EmployeeRepository repository) {
-        return (args) -> {
-            insertEmployees(repository);
-            System.out.println(repository.findAll());
-            System.out.println(repository.findEmployeeByLastName("Dat"));
-        };
-    }
 }
