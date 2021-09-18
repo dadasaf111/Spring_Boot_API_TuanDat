@@ -1,6 +1,7 @@
 package com.example.spring_boot_api_tuandat.controller;
 
 import com.example.spring_boot_api_tuandat.entity.Employee;
+import com.example.spring_boot_api_tuandat.error.EmployeeNotFoundException;
 import com.example.spring_boot_api_tuandat.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
     @GetMapping("/employees/{id}")
-    public Employee getEmployeeById(@PathVariable("id") Long employeeId){
+    public Employee getEmployeeById(@PathVariable("id") Long employeeId) throws EmployeeNotFoundException {
         return employeeService.getEmployeeById(employeeId);
     }
     @PutMapping("/employees/{id}")
